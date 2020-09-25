@@ -1,0 +1,8 @@
+agoraVideo/
+agoraVideoBackend/
+
+config.json
+logoRect.png
+logoSquare.png
+
+node_modules/
