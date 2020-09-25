@@ -29,6 +29,7 @@ async function generate (){
         "platformWindows",
         "platformMac",
         "platformLinux",
+        "CLIENT_ID",
     ];
     const backVars= [
         "APP_CERTIFICATE",
@@ -49,17 +50,18 @@ async function generate (){
     try{
         frontVars.map(key => frontend[key] = config[key]);
         backVars.map(key => backend[key] = config[key]);
-    
+
         backend['APP_ID'] = config['AppID'];
         backend['REDIRECT_URL'] = url.resolve(config['backEndURL'], 'oauth');
         frontend['logo'] = (config['logoRect']!=='')? await datauri(config['logoRect']) : defaultLogo;
-
+        frontend['landingHeading'] = config['HEADING'];
+        frontend['landingSubHeading'] = config['SUBHEADING'];
         const frontendConfigPromise = fs.writeFile(
-            `${config['projectName']}/config.json`, 
+            `${config['projectName']}/config.json`,
             JSON.stringify(frontend,null,2)
         );
         const backendConfigPromise = fs.writeFile(
-            `${config['projectName']}Backend/config.json`, 
+            `${config['projectName']}Backend/config.json`,
             JSON.stringify(backend,null,2)
         );
         await Promise.all([frontendConfigPromise, backendConfigPromise]);

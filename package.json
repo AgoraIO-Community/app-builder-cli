@@ -17,6 +17,8 @@
     "del": "^5.1.0",
     "gulp": "^4.0.2",
     "import-cwd": "^3.0.0",
-    "spinnies": "^0.5.1"
+    "spinnies": "^0.5.1",
+    "xmlbuilder2": "^2.4.0",
+    "xmldom": "^0.3.0"
   }
 }

@@ -13,6 +13,8 @@ const {syncSource} = require('./scripts/syncSource');
 const {initUIKit} = require('./scripts/initUIKit');
 const {androidIcons} = require('./scripts/androidIcons');
 const {iosIcons} = require('./scripts/iosIcons');
+const {processXml} = require('./scripts/processXml');
+const {backendDeep} = require('./scripts/addDeepLinkBackend');
 
 
 module.exports.default = series(
@@ -21,7 +23,7 @@ module.exports.default = series(
         // frontend
         create, // create a boilerplate
         // backend
-        backend    
+        backend
     ),
     generateConfig,
     package,
@@ -33,6 +35,8 @@ module.exports.default = series(
     updateGitIgnore,
     initUIKit,
     androidIcons,
-    iosIcons
+    iosIcons,
+    processXml,
+    backendDeep
 );
 // module.exports.default = initCode;
