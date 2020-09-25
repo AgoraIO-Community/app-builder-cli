@@ -2,11 +2,11 @@ const {spawn} = require('child_process');
 const {spinners} =require('./cli');
 const {projectName} = require('import-cwd')('./config.json');
 
-function syncSource(cb) {
-  spinners.add('updateFrontend',{text:"Fetching the latest front-end source code"});
-  var process = spawn(`cd ${projectName} && git fetch agora --force && git rebase agora/dist`,{shell: true});
+function updateGitIgnore(cb) {
+  spinners.add('update',{text:"Setting up gitignore"});
+  var process = spawn(`cd ${projectName} && git checkout --ours .gitignore && git add .gitignore && git rebase --continue`,{shell: true});
   process.on('exit', () => {
-    spinners.succeed('updateFrontend');
+    spinners.succeed('update');
     cb();
   })
 //   process.stdout.on('data', (data) => {
@@ -16,4 +16,4 @@ function syncSource(cb) {
 
 // create(()=>console.log("finished"),'proj');
 
-module.exports.syncSource = syncSource;
+module.exports.updateGitIgnore = updateGitIgnore;

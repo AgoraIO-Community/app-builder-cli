@@ -1,21 +1,22 @@
 {
-  "name": "uikit-scaffolding",
-  "version": "1.0.0",
+  "name": "agora-app-builder-cli",
+  "version": "0.0.1",
   "description": "",
   "main": "Gulpfile.js",
   "scripts": {
-    "start": "gulp -S",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "gulp -S"
+  },
+  "bin": {
+    "app-builder-init": "./init.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "datauri": "^3.0.0"
-  },
-  "devDependencies": {
+    "datauri": "^3.0.0",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
+    "import-cwd": "^3.0.0",
     "spinnies": "^0.5.1"
   }
 }

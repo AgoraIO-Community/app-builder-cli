@@ -1,6 +1,7 @@
 const fs = require('fs').promises
 const {spinners} =require('./cli');
-const {projectName, logoRect, logoSquare} = require('../config.json');
+const {projectName, logoRect, logoSquare} = require('import-cwd')('./config.json');
+const path = require('path');
 
 
 
@@ -12,7 +13,10 @@ async function copy() {
     //   var rectCopy = fs.copyFile(logoRect, `${projectName}/build/${logoRect}`);
     // }
     if(logoSquare!== ''){
-      var squareCopy = fs.copyFile(logoSquare, `${projectName}/build/icon.png`);
+      var squareCopy = fs.copyFile(
+        path.join(process.cwd(),logoSquare), 
+        path.join(process.cwd(),`${projectName}/build/icon.png`)
+      );
       await squareCopy;
     }
     // await Promise.all([rectCopy, squareCopy]);

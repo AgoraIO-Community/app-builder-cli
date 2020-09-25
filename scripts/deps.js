@@ -1,8 +1,8 @@
 const fs = require('fs').promises;
 const path = require('path');
-const {projectName} = require('../config.json');
+const {projectName} = require('import-cwd')('./config.json');
 const {deps,devDeps, scripts} =require('./deps.json')
-const JSON_PATH = path.join(__dirname, '../', projectName ,'package.json');
+const JSON_PATH = path.join(process.cwd(), projectName ,'package.json');
 const {spinners} = require('./cli');
 
 async function packageJson() {

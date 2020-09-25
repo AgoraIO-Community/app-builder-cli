@@ -1,5 +1,5 @@
 // generates front-end and backend config.json
-const config = require('../config.json');
+const config = require('import-cwd')('./config.json');
 const datauri = require('datauri');
 const fs = require('fs/promises');
 const {spinners} =require('./cli');

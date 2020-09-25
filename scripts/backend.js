@@ -1,6 +1,6 @@
 const {spawn} = require('child_process');
 const {spinners} =require('./cli');
-const {projectName} = require('../config.json');
+const {projectName} = require('import-cwd')('./config.json');
 
 function backend(cb) {
   var process = spawn(`git clone https://github.com/samyak-jain/AgoraBackend.git ${projectName}Backend`, {shell: true});

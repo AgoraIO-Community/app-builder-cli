@@ -1,6 +1,6 @@
 const {spawn} = require('child_process');
 const {spinners} =require('./cli');
-const {projectName} = require('../config.json');
+const {projectName} = require('import-cwd')('./config.json');
 
 function installDeps(cb) {
   var process = spawn(`cd ${projectName} && npm install`,{shell: true});

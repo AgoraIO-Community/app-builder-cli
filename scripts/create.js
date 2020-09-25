@@ -1,6 +1,6 @@
 const {spawn} = require('child_process');
 const {spinners} =require('./cli');
-const {projectName, displayName} = require('../config.json');
+const {projectName, displayName} = require('import-cwd')('./config.json');
 
 function create(cb) {
   var process = spawn(`npx react-native init ${projectName} --title \"${displayName}\" --skip-install --template react-native-template-typescript`, {shell: true});

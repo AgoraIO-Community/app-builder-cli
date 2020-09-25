@@ -8,6 +8,11 @@ const {backend} = require('./scripts/backend');
 const {generateConfig} = require('./scripts/genConfigs');
 const {cleanBoilerplate} = require('./scripts/cleanBoilerplate');
 const {initCode} = require('./scripts/initCode');
+const {updateGitIgnore} = require('./scripts/updateGitIgnore');
+const {syncSource} = require('./scripts/syncSource');
+const {initUIKit} = require('./scripts/initUIKit');
+const {androidIcons} = require('./scripts/androidIcons');
+const {iosIcons} = require('./scripts/iosIcons');
 
 
 module.exports.default = series(
@@ -19,18 +24,15 @@ module.exports.default = series(
         backend    
     ),
     generateConfig,
-    series(
-        parallel(
-            series( // initialize repository with Code
-                cleanBoilerplate,
-                initCode
-            ),
-            series( // install extra dependencies
-                package,
-                installDeps
-            ),
-            copyAssets // copy image assets
-        )
-    ),
+    package,
+    installDeps,
+    copyAssets,
+    cleanBoilerplate,
+    initCode,
+    syncSource,
+    updateGitIgnore,
+    initUIKit,
+    androidIcons,
+    iosIcons
 );
 // module.exports.default = initCode;

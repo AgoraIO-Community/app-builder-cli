@@ -1,11 +1,12 @@
 const del = require('del');
-const {projectName} = require('../config.json')
+const {projectName} = require('import-cwd')('./config.json')
 const {spinners} =require('./cli');
 
 const dels=[
     'App.tsx',
     'babel.config.js',
     'index.js',
+    '__tests__'
 ]
 
 function cleanBoilerplate() {
