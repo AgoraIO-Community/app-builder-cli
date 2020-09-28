@@ -6,7 +6,7 @@ const path = require('path');
 
 
 async function copy() {
-  spinners.add('copy',{text:"Copying image assets"});
+  spinners.add('copy',{text:"Copying icon"});
   try {
     await fs.mkdir(`${projectName}/build`, {recursive:true});
     // if(logoRect!== ''){
@@ -18,13 +18,15 @@ async function copy() {
         path.join(process.cwd(),`${projectName}/build/icon.png`)
       );
       await squareCopy;
+      spinners.succeed('copy');
     }
-    // await Promise.all([rectCopy, squareCopy]);
-    spinners.succeed('copy');
-    return;
+    else{
+      spinners.fail('copy', { text: 'No icon was specified in the config file'});
+    }
   }
   catch(e){
-    console.error(e);
+    // console.error(e);
+    spinners.fail('copy', { text: 'Couldn\'t copy the icon'});
   }
   return;
 }

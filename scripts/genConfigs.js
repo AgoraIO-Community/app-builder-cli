@@ -47,28 +47,50 @@ async function generate (){
     const frontend = {}
     const backend = {}
     spinners.add('config',{text:"Configuring front-end and backend"});
+    let configure = true;
     try{
-        frontVars.map(key => frontend[key] = config[key]);
-        backVars.map(key => backend[key] = config[key]);
-
-        backend['APP_ID'] = config['AppID'];
-        backend['REDIRECT_URL'] = url.resolve(config['backEndURL'], 'oauth');
-        frontend['logo'] = (config['logoRect']!=='')? await datauri(config['logoRect']) : defaultLogo;
-        frontend['landingHeading'] = config['HEADING'];
-        frontend['landingSubHeading'] = config['SUBHEADING'];
-        const frontendConfigPromise = fs.writeFile(
-            `${config['projectName']}/config.json`,
-            JSON.stringify(frontend,null,2)
-        );
-        const backendConfigPromise = fs.writeFile(
-            `${config['projectName']}Backend/config.json`,
-            JSON.stringify(backend,null,2)
-        );
-        await Promise.all([frontendConfigPromise, backendConfigPromise]);
-        spinners.succeed('config');
+        await fs.access(`${config.projectName}`)
     }
     catch(e){
-        console.error(e);
+        spinners.fail('config', { text: 'couldn\'t find frontend to configure'});
+        // console.log(e);
+        configure = false;
+    }
+    if(configure){
+        try{
+            await fs.access(`${config.projectName}Backend`);
+        }
+        catch(e){
+            spinners.fail('config', { text: 'couldn\'t find backend to configure'});
+            configure = false;
+        }
+    }
+    
+    if(configure){
+        try{
+            frontVars.map(key => frontend[key] = config[key]);
+            backVars.map(key => backend[key] = config[key]);
+    
+            backend['APP_ID'] = config['AppID'];
+            backend['REDIRECT_URL'] = url.resolve(config['backEndURL'], 'oauth');
+            frontend['logo'] = (config['logoRect']!=='')? await datauri(config['logoRect']) : defaultLogo;
+            frontend['landingHeading'] = config['HEADING'];
+            frontend['landingSubHeading'] = config['SUBHEADING'];
+            const frontendConfigPromise = fs.writeFile(
+                `${config['projectName']}/config.json`,
+                JSON.stringify(frontend,null,2)
+            );
+            const backendConfigPromise = fs.writeFile(
+                `${config['projectName']}Backend/config.json`,
+                JSON.stringify(backend,null,2)
+            );
+            await Promise.all([frontendConfigPromise, backendConfigPromise]);
+            spinners.succeed('config');
+        }
+        catch(e){
+            // console.error(e);
+            spinners.fail('config', { text: 'couldn\'t complete configuring'});
+        }
     }
     return;
 }

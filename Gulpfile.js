@@ -16,13 +16,10 @@ const {iosIcons} = require('./scripts/iosIcons');
 const {processXml} = require('./scripts/processXml');
 const {backendDeep} = require('./scripts/addDeepLinkBackend');
 
-
 module.exports.default = series(
     clean,
     parallel(
-        // frontend
         create, // create a boilerplate
-        // backend
         backend
     ),
     generateConfig,

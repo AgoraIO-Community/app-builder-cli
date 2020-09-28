@@ -3,12 +3,12 @@ const {spinners} =require('./cli');
 const {projectName, logoSquare} = require('import-cwd')('./config.json');
 
 function androidIcons(cb) {
-    if(logoSquare=== ''){
+    if(logoSquare === ''){
         cb();
     }
     else{
         var process = spawn(`cd ${projectName} && npm run icons:android`,{shell: true});
-        spinners.add('androidIcon',{text:"configuring icons for Android"});
+        spinners.add('androidIcon',{text:"Configuring icons for Android"});
         process.on('exit', () => {
             spinners.succeed('androidIcon');
             cb();

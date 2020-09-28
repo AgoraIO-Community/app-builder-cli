@@ -8,7 +8,7 @@ function iosIcons(cb) {
     }
     else{
         var process = spawn(`cd ${projectName} && npm run icons:ios`,{shell: true});
-        spinners.add('iosIcon',{text:"configuring icons for IOS"});
+        spinners.add('iosIcon',{text:"Configuring icons for IOS"});
         process.on('exit', () => {
             spinners.succeed('iosIcon');
             cb();

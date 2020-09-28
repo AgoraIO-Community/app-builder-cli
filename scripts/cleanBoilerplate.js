@@ -11,7 +11,13 @@ const dels=[
 
 function cleanBoilerplate() {
   spinners.add('cleanBoiler', {text:'Cleaning the boilerplate'});
-  return del(dels.map(file =>`${projectName}/${file}`)).then(()=>{spinners.succeed('cleanBoiler')});
+  return del(dels.map(file =>`${projectName}/${file}`))
+    .then(()=>{
+      spinners.succeed('cleanBoiler')
+    })
+    .catch(()=>{
+      spinners.fail('cleanBoiler', { text: 'Couldn\'t clean up the boilerplate'});
+    })
 }
 
 module.exports.cleanBoilerplate = cleanBoilerplate;
