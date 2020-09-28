@@ -3,6 +3,7 @@ const fs =require('fs').promises;
 const {projectName, frontEndURL} = require('import-cwd')('./config.json');
 const path = require('path');
 const {spinners} =require('./cli');
+const url = require('url');
 
 async function process(){
   spinners.add('processManifest',{text:"Processing Android Manifest"});
@@ -19,7 +20,7 @@ async function process(){
         }
       ],
       "data": {
-        "@android:scheme": projectName,
+        "@android:scheme": projectName.toLowerCase(),
         "@android:host": "my-host",
         "@android:pathPrefix": ""
       }
@@ -38,7 +39,7 @@ async function process(){
     ],
     "data": {
       "@android:scheme": "https",
-      "@android:host": frontEndURL,
+      "@android:host": url.parse(frontEndURL).hostname,
       "@android:pathPrefix": ""
     }
   }

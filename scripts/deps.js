@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const {projectName} = require('import-cwd')('./config.json');
-const {deps,devDeps, scripts} =require('./deps.json')
+const {deps,devDeps, scripts, optionalDeps} =require('./deps.json')
 const JSON_PATH = path.join(process.cwd(), projectName ,'package.json');
 const {spinners} = require('./cli');
 
@@ -15,29 +15,18 @@ async function packageJson() {
       spinners.fail('package', { text: 'couldn\'t find a package.json to configure'});
       configure = false;
   }
-
   try{
     let data = JSON.parse(
       await fs.readFile(JSON_PATH),
     );
   
-    let {
-      dependencies,
-      devDependencies
-    } = data;
-  
   
     let newPackage = {
       ...data,
       scripts,
-      dependencies: {
-        ...dependencies,
-        ...deps
-      },
-      devDependencies:{
-        ...devDependencies,
-        ...devDeps
-      }
+      dependencies: deps,
+      devDependencies:devDeps,
+      optionalDependencies: optionalDeps
     };
     await fs.writeFile(
       JSON_PATH,
