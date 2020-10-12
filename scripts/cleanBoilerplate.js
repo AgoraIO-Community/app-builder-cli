@@ -1,7 +1,7 @@
 const del = require('del');
 const {projectName} = require('import-cwd')('./config.json')
 const {spinners} =require('./cli');
-
+const opts = require('yargs').argv;
 const dels=[
     'App.tsx',
     'babel.config.js',
@@ -15,7 +15,10 @@ function cleanBoilerplate() {
     .then(()=>{
       spinners.succeed('cleanBoiler')
     })
-    .catch(()=>{
+    .catch((e)=>{
+      if(opts.info){
+        console.error(e);
+      }
       spinners.fail('cleanBoiler', { text: 'Couldn\'t clean up the boilerplate'});
     })
 }

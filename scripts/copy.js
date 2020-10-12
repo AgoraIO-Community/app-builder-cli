@@ -2,7 +2,7 @@ const fs = require('fs').promises
 const {spinners} =require('./cli');
 const {projectName, logoRect, logoSquare} = require('import-cwd')('./config.json');
 const path = require('path');
-
+const opts = require('yargs').argv;
 
 
 async function copy() {
@@ -25,7 +25,9 @@ async function copy() {
     }
   }
   catch(e){
-    // console.error(e);
+    if(opts.info){
+      console.error(e);
+    }
     spinners.fail('copy', { text: 'Couldn\'t copy the icon'});
   }
   return;

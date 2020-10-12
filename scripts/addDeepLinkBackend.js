@@ -2,6 +2,7 @@ const fs =require('fs').promises;
 const {projectName} = require('import-cwd')('./config.json');
 const path = require('path');
 const {spinners} =require('./cli');
+const opts = require('yargs').argv;
 
 async function process(){
   spinners.add('processManifest',{text:"configuring deep links on the backend"});
@@ -13,6 +14,9 @@ async function process(){
   }
   catch (e){
     spinners.fail('processManifest', { text: 'Failed process backend templates to add deeplinks'});
+    if(opts.info){
+      console.error(e);
+    }
   }
 }
 

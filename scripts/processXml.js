@@ -4,6 +4,7 @@ const {projectName, frontEndURL} = require('import-cwd')('./config.json');
 const path = require('path');
 const {spinners} =require('./cli');
 const url = require('url');
+const opts = require('yargs').argv;
 
 async function process(){
   spinners.add('processManifest',{text:"Processing Android Manifest"});
@@ -62,6 +63,9 @@ async function process(){
   }
   catch(e){
     spinners.fail('processManifest',{text:"Couldn't process android manifest"});
+    if(opts.info){
+      console.error(e);
+    }
   }
 }
 

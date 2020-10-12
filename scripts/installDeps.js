@@ -1,10 +1,10 @@
-const {spawn} = require('child_process');
+const {spawn} = require('./spawn');
 const {spinners} =require('./cli');
 const {projectName} = require('import-cwd')('./config.json');
 const fs = require('fs');
 
 function installDeps(cb) {
-  var process = spawn(`cd ${projectName} && npm install`,{shell: true});
+  var process = spawn("cd",[projectName,"&&","npm","install"]);
   spinners.add('installDeps',{text:"Installing dependencies"});
   process.on('exit', () => {
     fs.promises.access(`${projectName}/node_modules`)

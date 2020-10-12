@@ -1,10 +1,10 @@
-const {spawn} = require('child_process');
+const {spawn} = require('./spawn');
 const {spinners} =require('./cli');
 const {projectName} = require('import-cwd')('./config.json');
 const fs = require('fs');
 
 function backend(cb) {
-  var process = spawn(`git clone https://github.com/samyak-jain/AgoraBackend.git ${projectName}Backend`, {shell: true});
+  var process = spawn("git",["clone","https://github.com/samyak-jain/AgoraBackend.git",`${projectName}Backend`]);
   spinners.add('backend',{text:"Downloading backend"});
   process.on('exit', () => {
     fs.promises.access(`${projectName}Backend`)

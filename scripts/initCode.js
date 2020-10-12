@@ -1,4 +1,4 @@
-const {spawn} = require('child_process');
+const {spawn} = require('./spawn');
 const {projectName} = require('import-cwd')('./config.json')
 const {spinners} =require('./cli');
 const fs = require('fs');

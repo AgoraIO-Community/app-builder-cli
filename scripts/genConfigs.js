@@ -5,6 +5,7 @@ const fs = require('fs').promises;
 const {spinners} =require('./cli');
 const url = require('url');
 const {logo, background} = require('./images')
+const opts = require('yargs').argv;
 
 async function generate (){
 
@@ -49,7 +50,9 @@ async function generate (){
     }
     catch(e){
         spinners.fail('config', { text: 'couldn\'t find frontend to configure'});
-        // console.log(e);
+        if(opts.info){
+            console.error(e);
+        }
         configure = false;
     }
     if(configure){
@@ -90,8 +93,10 @@ async function generate (){
             spinners.succeed('config');
         }
         catch(e){
-            // console.error(e);
             spinners.fail('config', { text: 'couldn\'t complete configuring'});
+            if(opts.info){
+                console.error(e);
+            }
         }
     }
     return;
