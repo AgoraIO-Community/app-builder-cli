@@ -27,7 +27,8 @@ async function generate (){
         "platformMac",
         "platformLinux",
         "CLIENT_ID",
-        "ENABLE_OAUTH"
+        "ENABLE_OAUTH",
+        "encryption",
     ];
     const backVars= [
         "APP_CERTIFICATE",
