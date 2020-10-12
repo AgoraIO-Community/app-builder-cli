@@ -27,6 +27,7 @@ async function generate (){
         "platformMac",
         "platformLinux",
         "CLIENT_ID",
+        "ENABLE_OAUTH"
     ];
     const backVars= [
         "APP_CERTIFICATE",
@@ -39,6 +40,7 @@ async function generate (){
         "CLIENT_SECRET",
         "PSTN_USERNAME",
         "PSTN_PASSWORD",
+        "ENABLE_OAUTH"
     ];
 
     const frontend = {}
