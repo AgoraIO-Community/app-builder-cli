@@ -10,7 +10,12 @@ function updateGitIgnore(cb) {
     if(commandExists) {
         fs.promises.access(`${projectName}/.gitignore`)
             .then(()=>{
-              var process = spawn(`cd ${projectName} && git checkout --ours .gitignore && git add .gitignore && git rebase --continue`,{shell: true});
+              var process = spawn(`cd ${projectName} && git checkout --ours .gitignore && git add .gitignore && git rebase --continue`,{
+                shell: true, 
+                env:{
+                  GIT_EDITOR:true
+                }
+              });
               process.on('exit', () => {
                 fs.promises.access(`${projectName}/src`)
                   .then(() => {

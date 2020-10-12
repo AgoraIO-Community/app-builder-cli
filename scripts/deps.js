@@ -5,6 +5,7 @@ const {deps,devDeps, scripts, optionalDeps} =require('./deps.json')
 const JSON_PATH = path.join(process.cwd(), projectName ,'package.json');
 const {spinners} = require('./cli');
 const opts = require('yargs').argv;
+const os = require('os');
 
 async function packageJson() {
   spinners.add('package', {text:'Adding scripts and dependencies to package.json'});
@@ -27,9 +28,13 @@ async function packageJson() {
   
     let newPackage = {
       ...data,
+      main:".electron/index.js",
       scripts,
       dependencies: deps,
-      devDependencies:devDeps,
+      devDependencies: (os.platform()==='win32') ? devDeps : {
+        ...devDeps,
+        "@bam.tech/react-native-make": "3.0.0",
+      },
       optionalDependencies: optionalDeps
     };
     await fs.writeFile(

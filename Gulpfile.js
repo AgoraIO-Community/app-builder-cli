@@ -14,7 +14,7 @@ const {initUIKit} = require('./scripts/initUIKit');
 const {androidIcons} = require('./scripts/androidIcons');
 const {iosIcons} = require('./scripts/iosIcons');
 const {processXml} = require('./scripts/processXml');
-const {backendDeep} = require('./scripts/addDeepLinkBackend');
+const {modifyGradle} = require('./scripts/gradle');
 
 module.exports.default = series(
     clean,
@@ -34,6 +34,6 @@ module.exports.default = series(
     androidIcons,
     iosIcons,
     processXml,
-    backendDeep
+    modifyGradle
 );
 // module.exports.default = initCode;
