@@ -10,7 +10,7 @@ const init = function(cb){
         if(commandExists) {
             fs.promises.access(`${projectName}`)
                 .then(()=>{
-                    var process = spawn(`cd ${projectName} && git init && git add . && git commit -m "init" && git remote add agora "https://github.com/AgoraIO-Community/app-builder-core.git"`,{shell: true});
+                    var process = spawn("cd",[projectName,"&&","git","init","&&","git","add",".","&&","git","commit","-m","init","&&","git","remote","add","agora","https://github.com/AgoraIO-Community/app-builder-core.git"]);
                     process.on('exit', () => {
                         spinners.succeed('initBoiler');
                         cb();

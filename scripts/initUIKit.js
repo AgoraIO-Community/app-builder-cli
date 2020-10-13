@@ -10,7 +10,7 @@ function uikitInit(cb) {
         if(commandExists) {
             fs.promises.access(`${projectName}`)
                 .then(()=>{
-                    var process = spawn(`cd ${projectName} && git clone https://github.com/AgoraIO-Community/ReactNative-UIKit.git agora-rn-uikit && cd agora-rn-uikit && git checkout "app-builder"`,{shell: true});
+                    var process = spawn("cd",[projectName,"&&","git","clone","https://github.com/AgoraIO-Community/ReactNative-UIKit.git","agora-rn-uikit","&&","cd","agora-rn-uikit","&&","git","checkout","app-builder"]);
                     process.on('exit', () => {
                         fs.promises.access(`${projectName}/agora-rn-uikit`)
                             .then(() => {

@@ -10,13 +10,14 @@ function syncSource(cb) {
     if(commandExists) {
       fs.promises.access(`${projectName}`)
         .then(()=>{
-          var process = spawn(`cd ${projectName} && git fetch agora --force && git rebase agora/dist`,{shell: true});
+          var process = spawn("cd",[projectName,"&&","git","fetch","agora","--force","&&","git","rebase","agora/dist"]);
           process.on('exit', () => {
             spinners.succeed('updateFrontend');
             cb();            
           });
-          process.on('data',(err)=>{
-            console.log(err);
+          process.on('error',(err)=>{
+            spinners.succeed('updateFrontend');
+            cb();
           });
         })
         .catch(e => {

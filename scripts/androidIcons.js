@@ -7,7 +7,7 @@ function androidIcons(cb) {
         cb();
     }
     else{
-        var process = spawn(`cd ${projectName} && npm run icons:android`,{shell: true});
+        var process = spawn("cd",[projectName,"&&","npm","run","icons:android"]);
         spinners.add('androidIcon',{text:"Configuring icons for Android"});
         process.on('exit', () => {
             spinners.succeed('androidIcon');
